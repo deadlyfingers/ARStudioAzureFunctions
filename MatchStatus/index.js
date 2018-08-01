@@ -41,7 +41,7 @@ const findMatchById = function(context, id, projection = {}) {
   return Match.findById(id, projection, function(err, match) {
     if (err) return doneError(context, err);
     if (match === null) {
-      return doneError(context, "Match 'id' not found");
+      return doneError(context, "Match 'id' not found", 400);
     }
 
     // found match!
@@ -54,7 +54,7 @@ const findMatchWithConditions = function(context, conditions = {}, projection = 
   return Match.findOne(conditions, projection, function(err, match) {
     if (err) return doneError(context, err);
     if (match === null) {
-      return doneError(context, "Match not found: " + (conditions && conditions.ownerId));
+      return doneError(context, "Match not found: " + (conditions && conditions.ownerId), 400);
     }
 
     // found match!

@@ -105,16 +105,19 @@ const evaluateMoves = function(p1Move, p2Move) {
 
 const getWinningMessage = function(p1Move, p2Move) {
   const elements = ["Fire", "Earth", "Water"]; // ["Rock", "Scissors", "Paper"]
+  const verbs = ["burns", "drinks", "extinguishes"]; // ["smashes", "cuts", "covers"]
   var winner = evaluateMoves(p1Move, p2Move);
   if (winner === 1) {
     // player 1 wins
-    return elements[p1Move] + " beats " + elements[p2Move];
+    const verb = verbs[p1Move] || "beats";
+    return `${elements[p1Move]}  ${verb} ${elements[p2Move]}`;
   } else if (winner === 2) {
     // player 2 wins
-    return elements[p2Move] + " beats " + elements[p1Move];
+    const verb = verbs[p2Move] || "beats";
+    return `${elements[p2Move]}  ${verb} ${elements[p1Move]}`;
   } else if (winner === 0) {
     // draw
-    return elements[p1Move] + " draws";
+    return `${elements[p1Move]} draws`;
   }
   // unknown result
   return "";
