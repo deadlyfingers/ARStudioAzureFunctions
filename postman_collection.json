@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "0f60f388-0687-41ba-a29a-8ef6424b8753",
+		"name": "ARStudioFunctions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LobbyCreate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:7071/api/LobbyCreate?private=true&pinLength=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"LobbyCreate"
+					],
+					"query": [
+						{
+							"key": "private",
+							"value": "true"
+						},
+						{
+							"key": "pinLength",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LobbyJoin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/LobbyJoin?playerId=Player2&pin=0120",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"LobbyJoin"
+					],
+					"query": [
+						{
+							"key": "playerId",
+							"value": "Player2"
+						},
+						{
+							"key": "pin",
+							"value": "0120"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MatchStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:7071/api/MatchStatus?id=5b61bfea7679818e0384cd3e&playerId=Player2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"MatchStatus"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "5b61bfea7679818e0384cd3e"
+						},
+						{
+							"key": "playerId",
+							"value": "Player2"
+						},
+						{
+							"key": "result",
+							"value": "true",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MatchReady",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:7071/api/MatchReady?id=5b61bfea7679818e0384cd3e&playerId=Player2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"MatchReady"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "5b61bfea7679818e0384cd3e"
+						},
+						{
+							"key": "playerId",
+							"value": "Player2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MatchTurn",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:7071/api/MatchTurn?id=5b61bfea7679818e0384cd3e&playerId=Player2&move=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"MatchTurn"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "5b61bfea7679818e0384cd3e"
+						},
+						{
+							"key": "playerId",
+							"value": "Player2"
+						},
+						{
+							"key": "move",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

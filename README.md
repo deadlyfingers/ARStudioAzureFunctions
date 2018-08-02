@@ -1,4 +1,4 @@
-# Azure functions for AR Studio networking game backend
+# AR Studio game backend with Azure Functions
 
 Note: [AR Studio](https://developers.facebook.com/products/ar-studio) requires a Mac so we everything here is written for Mac user, but everything should run ok on Windows once available.
 
@@ -15,7 +15,15 @@ Note: [AR Studio](https://developers.facebook.com/products/ar-studio) requires a
   `func host start --debug VSCode`
 3. Start ngrok https server
   `ngrok http 7071`
-4. Add your ngrok domain to AR Studio whitelisted domains.
+4. Clone the [AR Studio game project](https://github.com/deadlyfingers/ARStudioGame) and add your *ngrok domain* to whitelisted domains. (Refer to the [readme](https://github.com/deadlyfingers/ARStudioGame/blob/master/README.md) for config instuctions.)
+
+## API
+The API is available as [Postman collection](https://github.com/deadlyfingers/ARStudioGame/blob/master/postman_collection.json) which can be imported into [Postman app](https://www.getpostman.com/).
+- LobbyCreate
+- LobbyJoin
+- MatchReady
+- MatchStatus
+- MatchTurn
 
 ## Testing
 `npm test`

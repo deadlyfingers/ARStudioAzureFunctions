@@ -110,11 +110,11 @@ const getWinningMessage = function(p1Move, p2Move) {
   if (winner === 1) {
     // player 1 wins
     const verb = verbs[p1Move] || "beats";
-    return `${elements[p1Move]}  ${verb} ${elements[p2Move]}`;
+    return `${elements[p1Move]} ${verb} ${elements[p2Move]}`;
   } else if (winner === 2) {
     // player 2 wins
     const verb = verbs[p2Move] || "beats";
-    return `${elements[p2Move]}  ${verb} ${elements[p1Move]}`;
+    return `${elements[p2Move]} ${verb} ${elements[p1Move]}`;
   } else if (winner === 0) {
     // draw
     return `${elements[p1Move]} draws`;
