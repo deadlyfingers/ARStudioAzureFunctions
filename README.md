@@ -9,16 +9,16 @@ Note: [AR Studio](https://developers.facebook.com/products/ar-studio) requires a
 - [ngrok for serving localhost as https (required for AR Studio)](https://ngrok.com/download)
 
 ## Test on device using localhost
-1. Start mongodb
+1. Start mongodb  
   `mongod`
-2. Start Azure Functions locally
+2. Start Azure Functions locally  
   `func host start --debug VSCode`
-3. Start ngrok https server
+3. Start ngrok https server  
   `ngrok http 7071`
 4. Clone the [AR Studio game project](https://github.com/deadlyfingers/ARStudioGame) and add your *ngrok domain* to whitelisted domains. (Refer to the [readme](https://github.com/deadlyfingers/ARStudioGame/blob/master/README.md) for config instuctions.)
 
 ## API
-The API is available as [Postman collection](https://github.com/deadlyfingers/ARStudioAzureFunctions/blob/master/postman_collection.json) which can be imported into [Postman app](https://www.getpostman.com/).
+The API is available as [Postman collection](https://raw.githubusercontent.com/deadlyfingers/ARStudioAzureFunctions/master/postman_collection.json) which can be imported into [Postman app](https://www.getpostman.com/).
 - LobbyCreate
 - LobbyJoin
 - MatchReady
@@ -30,9 +30,16 @@ The API is available as [Postman collection](https://github.com/deadlyfingers/AR
 
 ## Deployment
 1. Fork this repo
-2. Create new Azure Function in [Azure portal](https://portal.azure.com)
-3. Once the Azure Function is provisioned then update your Function app settings to use version 2 (beta)
+2. Sign in to [Azure portal](https://portal.azure.com)
+2. Create new **Azure Function**
+3. Once your **Azure Function** is provisioned then update your **Function app settings** to use **version 2 (beta)**
 ![azurefunctions-v2-beta](https://user-images.githubusercontent.com/1880480/43584718-1b5f9a5a-965b-11e8-8206-2910cefcfc9e.png)
-4. To deploy your Function app select
-  **Platform Features > Deployment Options > Setup > GitHub**
+4. Create new **Azure Cosmos DB** and select MongoDB from the API options. Once it's provisioned then select '**Connection String**' under **Settings** and copy your connection details including *HOST*, *PORT*, *USERNAME*, *PRIMARY PASSWORD* 
+5. Back in your **Azure Function** add the following environment variables using your connection details:
+    - **MongoDBHost**
+    - **MongoDBPort**
+    - **MongoDBUser**
+    - **MongoDBPass**
+6. To deploy your Function app select  
+  **Platform Features > Deployment Options > Setup > GitHub**  
   and choose your forked repo.
