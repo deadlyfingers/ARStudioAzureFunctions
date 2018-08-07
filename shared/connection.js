@@ -16,11 +16,10 @@ if (process.env.WEBSITE_NODE_DEFAULT_VERSION) {
 }
 
 // MongoDB connection
-const options = {};
 const connectionUri = (!user || !pass)
   ? 'mongodb://' + host + '/' + database
   : util.format('mongodb://%s:%s@%s:%s/%s%s', user, pass, host, port, database, params);
-const connection = mongoose.createConnection(connectionUri, options);
+const connection = mongoose.connect(connectionUri);
 
 module.exports = {
   connection,
