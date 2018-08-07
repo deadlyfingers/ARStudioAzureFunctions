@@ -1,6 +1,7 @@
 const getHost = require("./helpers").getHost;
 
-const _host = getHost(process.env.AzureWebJobsDashboard || "http://localhost:7071");
+// Requires Azure Function 'AccountName' and 'defaultCode' environment vars
+const _host = getHost(process.env.AccountName || "http://localhost:7071");
 const _apiUri = _host + "/api/";
 // console.info("Host:", _host, "\nFunctions Api:", _apiUri, "\nCode:", process.env.defaultCode);
 
