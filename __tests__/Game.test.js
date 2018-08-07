@@ -1,6 +1,7 @@
 const frisby = require('frisby');
 const Joi = frisby.Joi;
 const Api = require("./@setup/config").Api;
+const queryString = require("./@setup/helpers").queryString;
 
 var matchId, pin, player1Id; // player1Id uses lobby id
 var player2Id = "p2";
@@ -10,8 +11,12 @@ var player2Move = 2;
 var winnerResult = 1; // 0 = draw, 1 = Player 1 wins, 2 = Player 2 wins
 
 it('Create private Lobby using pin', function(done) {
+  const query = queryString({
+    "pinLength": 9,
+    "private": true
+  });
   return frisby
-    .get(Api.LobbyCreate + "?private=true&pinLength=9")
+    .get(Api.LobbyCreate + query)
     .expect('status', 201)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -31,8 +36,12 @@ it('Create private Lobby using pin', function(done) {
 });
 
 it('Join private Lobby with pin and create Match', function(done) {
+  const query = queryString({
+    "pin": pin,
+    "playerId": player2Id
+  });
   return frisby
-    .get(Api.LobbyJoin + "?pin=" + pin + "&playerId=" + player2Id)
+    .get(Api.LobbyJoin + query)
     .expect('status', 201)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -47,8 +56,11 @@ it('Join private Lobby with pin and create Match', function(done) {
 });
 
 it('Match ready status for Player 1 should be false', function(done) {
+  const query = queryString({
+    "playerId": player1Id
+  });
   return frisby
-    .get(Api.MatchStatus + "?playerId=" + player1Id)
+    .get(Api.MatchStatus + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -64,8 +76,11 @@ it('Match ready status for Player 1 should be false', function(done) {
 });
 
 it('Match ready status for Player 2 should be false', function(done) {
+  const query = queryString({
+    "id": matchId
+  });
   return frisby
-    .get(Api.MatchStatus + "?id=" + matchId)
+    .get(Api.MatchStatus + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -81,8 +96,12 @@ it('Match ready status for Player 2 should be false', function(done) {
 });
 
 it('Player 1 is Ready', function(done) {
+  const query = queryString({
+    "id": matchId,
+    "playerId": player1Id
+  });
   return frisby
-    .get(Api.MatchReady + "?id=" + matchId + "&playerId=" + player1Id)
+    .get(Api.MatchReady + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -96,8 +115,12 @@ it('Player 1 is Ready', function(done) {
 });
 
 it('Player 2 is Ready', function(done) {
+  const query = queryString({
+    "id": matchId,
+    "playerId": player2Id
+  });
   return frisby
-    .get(Api.MatchReady + "?id=" + matchId + "&playerId=" + player2Id)
+    .get(Api.MatchReady + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -111,8 +134,11 @@ it('Player 2 is Ready', function(done) {
 });
 
 it('Match ready status for players should be true', function(done) {
+  const query = queryString({
+    "id": matchId
+  });
   return frisby
-    .get(Api.MatchStatus + "?id=" + matchId)
+    .get(Api.MatchStatus + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -129,8 +155,13 @@ it('Match ready status for players should be true', function(done) {
 });
 
 it('Player 1 moves', function(done) {
+  const query = queryString({
+    "id": matchId,
+    "move": player1Move,
+    "playerId": player1Id
+  });
   return frisby
-    .get(Api.MatchTurn + "?id=" + matchId + "&playerId=" + player1Id + "&move=" + player1Move)
+    .get(Api.MatchTurn + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string()
@@ -139,8 +170,12 @@ it('Player 1 moves', function(done) {
 });
 
 it('Get match result status', function(done) {
+  const query = queryString({
+    "id": matchId,
+    "result": true
+  });
   return frisby
-    .get(Api.MatchStatus + "?id=" + matchId + "&result=true")
+    .get(Api.MatchStatus + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string()
@@ -149,8 +184,13 @@ it('Get match result status', function(done) {
 });
 
 it('Player 2 moves', function(done) {
+  const query = queryString({
+    "id": matchId,
+    "move": player2Move,
+    "playerId": player2Id
+  });
   return frisby
-    .get(Api.MatchTurn + "?id=" + matchId + "&playerId=" + player2Id + "&move=" + player2Move)
+    .get(Api.MatchTurn + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string()
@@ -159,8 +199,12 @@ it('Player 2 moves', function(done) {
 });
 
 it('Get match winner result status', function(done) {
+  const query = queryString({
+    "id": matchId,
+    "result": true
+  });
   return frisby
-    .get(Api.MatchStatus + "?id=" + matchId + "&result=true")
+    .get(Api.MatchStatus + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -181,8 +225,11 @@ it('Get match winner result status', function(done) {
 });
 
 it('Match ready status for Players should be reset to false', function(done) {
+  const query = queryString({
+    "id": matchId
+  });
   return frisby
-    .get(Api.MatchStatus + "?id=" + matchId)
+    .get(Api.MatchStatus + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -201,8 +248,12 @@ it('Match ready status for Players should be reset to false', function(done) {
 // rematch
 
 it('Player 2 is Ready for rematch', function(done) {
+  const query = queryString({
+    "id": matchId,
+    "playerId": player2Id
+  });
   return frisby
-    .get(Api.MatchReady + "?id=" + matchId + "&playerId=" + player2Id)
+    .get(Api.MatchReady + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -216,8 +267,12 @@ it('Player 2 is Ready for rematch', function(done) {
 });
 
 it('Player 1 is Ready for rematch', function(done) {
+  const query = queryString({
+    "id": matchId,
+    "playerId": player1Id
+  });
   return frisby
-    .get(Api.MatchReady + "?id=" + matchId + "&playerId=" + player1Id)
+    .get(Api.MatchReady + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -231,8 +286,13 @@ it('Player 1 is Ready for rematch', function(done) {
 });
 
 it('Player 2 moves #2', function(done) {
+  const query = queryString({
+    "id": matchId,
+    "move": 0,
+    "playerId": player2Id
+  });
   return frisby
-    .get(Api.MatchTurn + "?id=" + matchId + "&playerId=" + player2Id + "&move=" + 0)
+    .get(Api.MatchTurn + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string()
@@ -241,8 +301,13 @@ it('Player 2 moves #2', function(done) {
 });
 
 it('Player 1 moves #2', function(done) {
+  const query = queryString({
+    "id": matchId,
+    "move": 0,
+    "playerId": player1Id
+  });
   return frisby
-    .get(Api.MatchTurn + "?id=" + matchId + "&playerId=" + player1Id + "&move=" + 0)
+    .get(Api.MatchTurn + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string()
@@ -251,8 +316,12 @@ it('Player 1 moves #2', function(done) {
 });
 
 it('Get match #2 winner result status', function(done) {
+  const query = queryString({
+    "id": matchId,
+    "result": true
+  });
   return frisby
-    .get(Api.MatchStatus + "?id=" + matchId + "&result=true")
+    .get(Api.MatchStatus + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string(),
@@ -273,8 +342,11 @@ it('Get match #2 winner result status', function(done) {
 });
 
 it('Match ready status for Players should be reset to false', function(done) {
+  const query = queryString({
+    "id": matchId
+  });
   return frisby
-    .get(Api.MatchStatus + "?id=" + matchId)
+    .get(Api.MatchStatus + query)
     .expect('status', 200)
     .expect('jsonTypes', {
       '_id': Joi.string(),

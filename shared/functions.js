@@ -1,6 +1,9 @@
 const doneError = (context, error, status = 500) => {
   context.res = {
     'body': { 'error': error },
+    'headers': {
+      'Content-Type': 'application/json'
+    },
     'status': status
   };
   context.done();
@@ -12,6 +15,9 @@ const doneSuccess = (context, doc, status = 200) => {
   }
   context.res = {
     'body': doc,
+    'headers': {
+      'Content-Type': 'application/json'
+    },
     'status': status
   };
   context.done();

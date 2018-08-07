@@ -1,7 +1,7 @@
 const getHost = function(delimitedKeyValueString) {
   var accountName = getValue(delimitedKeyValueString, "AccountName");
   if (accountName.substring(0, 4) !== "http") {
-    accountName = "https://" + accountName;
+    accountName = "https://" + accountName + ".azurewebsites.net";
   }
   return accountName;
 }
@@ -21,7 +21,24 @@ const getValue = function(delimitedKeyValueString, key) {
   return dict[key] || delimitedKeyValueString;
 }
 
+// converts a key-value object into a GET query string
+const queryString = function(keyValueParams = {}) {
+  // if (!params) { return ""; }
+  var params = keyValueParams || {};
+  if (params && !params.code && process.env.defaultCode) {
+    params.code = process.env.defaultCode;
+  }
+  var q = "";
+  Object.keys(params).forEach(function(key, i) {
+    var delimiter = (i > 0) ? "&" : "?";
+    var value = (key === "code") ? params[key] : encodeURIComponent(params[key]);
+    q += delimiter + encodeURIComponent(key) + "=" + value;
+  });
+  return q;
+};
+
 module.exports = {
   getHost,
-  getValue
+  getValue,
+  queryString
 };
