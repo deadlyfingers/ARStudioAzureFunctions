@@ -19,7 +19,7 @@ if (process.env.WEBSITE_NODE_DEFAULT_VERSION) {
 const connectionUri = (!user || !pass)
   ? 'mongodb://' + host + '/' + database
   : util.format('mongodb://%s:%s@%s:%s/%s%s', user, pass, host, port, database, params);
-const connection = mongoose.connect(connectionUri);
+const connection = mongoose.connect(connectionUri, { 'useMongoClient': true });
 
 module.exports = {
   connection,
