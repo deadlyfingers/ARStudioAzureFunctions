@@ -13,12 +13,15 @@
     "jest": "^23.4.1"
   },
   "scripts": {
+    "start": "func host start",
+    "debug": "func host start --debug VSCode",
     "test": "jest"
   },
   "author": "",
   "license": "MIT",
   "private": true,
   "jest": {
+    "testEnvironment": "node",
     "testPathIgnorePatterns": [
       ".*/node_modules/.*",
       "@.*/"

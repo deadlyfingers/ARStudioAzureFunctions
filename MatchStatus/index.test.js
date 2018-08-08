@@ -1,5 +1,4 @@
 const path = require('path');
-const mongoose = require("mongoose");
 const myFunctionName = path.basename(__dirname);
 const myFunction = require('./');
 
@@ -17,5 +16,3 @@ test(myFunctionName, (done) => {
   };
   myFunction(mockContext, mockRequest);
 });
-
-afterAll(() => mongoose.disconnect());

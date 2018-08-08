@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const mongoose = require("mongoose");
 const file = path.join(__dirname, './sample.dat');
 const data = JSON.parse(fs.readFileSync(file, { 'encoding': 'utf8' }));
 const myFunctionName = path.basename(__dirname);
@@ -35,5 +34,3 @@ test(myFunctionName, (done) => {
   };
   myFunction(mockContext, mockRequest);
 });
-
-afterAll(() => mongoose.disconnect());
