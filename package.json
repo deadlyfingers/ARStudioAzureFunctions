@@ -1,8 +1,10 @@
 {
-  "name": "arstudio",
+  "name": "arstudio-azure-functions",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deadlyfingers/ARStudioAzureFunctions"
+  },
   "dependencies": {
     "bluebird": "^3.5.1",
     "mongodb": "^3.0.1",
@@ -17,9 +19,6 @@
     "debug": "func host start --debug VSCode",
     "test": "jest"
   },
-  "author": "",
-  "license": "MIT",
-  "private": true,
   "jest": {
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
@@ -32,5 +31,12 @@
       "!coverage/**",
       "!**/node_modules/**"
     ]
-  }
+  },
+  "main": "index.js",
+  "description": "Azure Functions backend for AR Studio game",
+  "keywords": ["Azure Functions", "AR Studio"],
+  "author": "David Douglas",
+  "homepage": "http://deadlyfingers.net",
+  "license": "MIT",
+  "private": true
 }
