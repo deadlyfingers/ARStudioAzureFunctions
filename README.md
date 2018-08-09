@@ -21,9 +21,11 @@ Note: [AR Studio](https://developers.facebook.com/products/ar-studio) requires a
 The API is available as [Postman collection](https://raw.githubusercontent.com/deadlyfingers/ARStudioAzureFunctions/master/postman_collection.json) which can be imported into [Postman app](https://www.getpostman.com/).
 - LobbyCreate
 - LobbyJoin
+- LobbyDelete
 - MatchReady
 - MatchStatus
 - MatchTurn
+- MatchDelete
 
 ## Testing 
 `npm test`
